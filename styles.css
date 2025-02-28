@@ -1,0 +1,748 @@
+/* ヘッダー全体 */
+/* ヘッダー全体 */
+/* ヘッダー全体のスタイル */
+header {
+    background-color: black;
+    width: 100%;
+    height: 90px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;  /* ヘッダー内の要素を **上下中央揃え** にする  */
+}
+
+/* ヘッダー内部のレイアウト */
+.header-inner {
+    width: 100%;
+    display: flex;
+    align-items: center; /* ← これで「ロゴ＆ハンバーガーメニュー」を中央揃え */
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* ロゴの調整 */
+.logo {
+    display: flex;
+    align-items: center; /* ← ロゴを上下中央揃え */
+}
+
+.logo img {
+    height: 60px;  /* ヘッダーに対して適切な高さに調整 */
+    max-height: 80%;  /* ヘッダーの高さ以内に収める */
+    width: auto;
+    vertical-align: middle; /* 画像内のテキストボックスによるズレを補正 */
+}
+
+
+/* PC用ナビゲーション */
+.desktop-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.desktop-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    padding: 0;
+    margin: 0;
+}
+
+.desktop-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.desktop-nav ul li a:hover {
+    color: #ff7f50;
+}
+
+/* 問い合わせボタン（PC用） */
+.contact-button {
+    background-color: #ff7f50;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.contact-button:hover {
+    background-color: #e67340;
+}
+
+/* スマホ用ナビ（ハンバーガーメニュー） */
+.hamburger-menu {
+    display: none; /* 初期状態は非表示 */
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* ハンバーガーメニューの線 */
+.menu-icon span {
+    background-color: white;
+    height: 3px;
+    width: 30px;
+    margin: 5px 0;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+}
+
+/* 1本目の線 */
+.menu-icon span:nth-child(1) {
+    top: 10px;
+}
+
+/* 2本目の線 */
+.menu-icon span:nth-child(2) {
+    top: 18px;
+}
+
+/* 3本目の線 */
+.menu-icon span:nth-child(3) {
+    top: 26px;
+}
+
+/* --- "×" のアニメーション（JSでクラスを追加） --- */
+.menu-icon.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;  /* 真ん中の線を消す */
+}
+.menu-icon.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* モバイルメニューのデフォルト状態（非表示にする） */
+.mobile-nav {
+    display: none; /* 初期状態は非表示 */
+    position: fixed;
+    top: 90px; /* ヘッダーの下 */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 90px); /* ヘッダーを除いた高さ */
+    background: #333; /* 濃い灰色（透過なし） */
+    text-align: center;
+    z-index: 998;
+    
+    flex-direction: column; /* メニューを縦並びに */
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px; /* 上の余白を調整 */
+}
+
+/* メニューが開いたときに表示 */
+.mobile-nav.active {
+    display: flex; /* ここで初めて表示する */
+}
+
+/* メニューのリスト（余計な余白を削除し、正確に配置） */
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* 余白をリセット */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+/* メニュー項目 */
+.mobile-nav ul li {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #555; /* メニュー間の区切り */
+}
+
+/* メニューのリンク */
+.mobile-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    transition: background 0.3s ease;
+}
+
+/* メニューのホバー時 */
+.mobile-nav ul li a:hover {
+    background: #444; /* 明るめのグレーに変更 */
+}
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+    /* PC用ナビ＆お問い合わせボタンを非表示 */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;  /* 右端も指定し、幅を100%に */
+        width: 100%;
+        height: 90px;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    /* ヘッダー内部のコンテンツ */
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;  /* ヘッダー内部の幅も100% */
+        padding: 0 20px; /* 余白を調整 */
+    }
+    .desktop-nav, .contact-button {
+        display: none;
+    }
+
+    /* ハンバーガーメニュー表示 */
+    .hamburger-menu {
+        display: flex;
+        margin-left: auto; /* 右側へ寄せる */
+    }
+
+
+    .menu-icon {
+        display: flex;
+    }
+
+    .header-inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 15px; /
+    }
+
+    /* ロゴを左側に配置 */
+    .logo {
+        position: static; /* 絶対位置指定を解除 */
+        margin-left: 100; /* 左端に寄せる */
+    }
+    }
+
+
+
+/* ナビゲーションメニュー（中央揃え） */
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px; /* 各メニューボタンの間隔 */
+    padding: 0;
+    margin: 0;
+}
+
+/* ナビゲーションリンク */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding-bottom: 5px;
+    display: inline-block;
+    border-bottom: 3px solid brown; /* 下線を茶色に */
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    border-bottom: 4px solid saddlebrown;
+}
+
+/* 問い合わせボタン（画面の右端から300pxに配置） */
+.contact-button {
+    position: absolute;
+    right: 300px; /* 右端から300px */
+    background-color: #ff7f50;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+
+    /* ▼ 以下を追加して中央に揃える */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.contact-button:hover {
+    background-color: #e67340; /* ホバーで色を少し暗く */
+}
+
+/* 本文内の目次のスタイリング */
+main h2 {
+    text-align: center;  /* 中央揃え */
+    font-size: 24px;  /* 見出しのサイズ */
+    font-weight: bold;  /* 太字 */
+    padding-bottom: 5px;  /* 下線との間隔 */
+    border-bottom: 3px solid brown;  /* 茶色の下線 */
+    display: inline-block;
+    width: auto;
+    margin: 20px auto; /* 上下20pxの余白 + 左右自動配置（中央寄せ） */
+}
+
+/* 本文内の目次（h2）を画面の中央に配置 */
+main section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 左右中央 */
+    justify-content: center; /* コンテンツの中央 */
+    text-align: center; /* 内部コンテンツも中央寄せ */
+    min-height: 400px; /* 各セクションの高さ（調節可） */
+}
+
+/* 目次（h2）のデザイン調整 */
+main h2 {
+    font-size: 24px;  /* 見出しのフォントサイズ */
+    font-weight: bold;  /* 太字 */
+    padding-bottom: 5px;  /* 下線との間隔 */
+    border-bottom: 3px solid brown;  /* 茶色の下線 */
+    display: inline-block;
+    text-align: center;
+}
+/* 共通の本文セクション */
+section {
+    padding: 60px 10%; /* 上下60px、左右10%の余白でバランスよく */
+}
+
+/* 背景色の設定：交互 */
+#about-intern { background-color: #ffffff; }  /* 白 */
+#intern-merits { background-color: #f5f5f5; } /* 灰色（薄いグレー） */
+#support-results { background-color: #ffffff; } /* 白 */
+#video-library { background-color: #f5f5f5; } /* 灰色（薄いグレー） */
+#event-schedule { background-color: #ffffff; } /* 白 */
+
+
+
+/* 動画コンテナ（横並びにする） */
+.video-container {
+    display: flex;
+    justify-content: center; /* センター寄せ */
+    gap: 20px;  /* 動画同士の間隔を設定 */
+    flex-wrap: wrap;  /* スマホ対応 → 画面幅が狭い時に縦並び */
+    margin-top: 20px;
+}
+
+/* TikTok埋め込み動画を適切なサイズに調整 */
+.tiktok-embed {
+    flex: 1; /* 各動画を均等配置 */
+    max-width: 250px; /* 最大幅を250pxに制限 */
+    min-width: 200px; /* 最小幅を設定 */
+
+    transform: scale(0.9); 
+}
+
+/* メリットコンテナ（PC表示時は横並び） */
+.merit-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* 画面が狭くなったら折り返す */
+    margin-top: 20px;
+}
+
+/* 各メリットカード */
+.merit {
+    flex: 1;
+    max-width: 30%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* スマホ表示時（3つの要素を縦に並べる） */
+@media screen and (max-width: 768px) {
+    .merit-container {
+        flex-direction: column; /* 縦に並べる */
+        align-items: center; /* 中央揃え */
+    }
+
+    .merit {
+        max-width: 80%; /* 幅を広げて見やすくする */
+    }
+}
+/* メリットのタイトル */
+.merit h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* メリットの説明 */
+.merit p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* フッター全体 */
+footer {
+    background-color: #d3d3d3; /* 灰色の背景 */
+    width: 100%; /* 横幅いっぱい */
+    height: 300px; /* 高さ300px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* フッター内部コンテンツ */
+.footer-content {
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    text-align: center; /* 文字を中央寄せ */
+}
+
+/* フッターロゴ */
+.footer-logo img {
+    height: 80px; /* ロゴサイズ調整 */
+    width: auto;
+    margin-bottom: 10px; /* 下に余白を作る */
+}
+
+/* フッターの電話番号（ロゴの下） */
+.footer-contact {
+    font-size: 16px;
+    color: black;
+    margin-bottom: 20px; /* 次の要素とは適度な間隔 */
+}
+
+/* フッターナビ（上より少し間隔をあける） */
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav ul li a {
+    color: black; /* 文字色を黒 */
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* コピーライト */
+.copyright {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* グラフのラッパー（横並び） */
+.charts {
+    display: flex;
+    justify-content: center;  /* 中央揃え */
+    align-items: center;
+    gap: 50px;  /* グラフ同士の間隔 */
+    flex-wrap: wrap;  /* スマホでは縦並び */
+    margin-top: 20px;
+    width: 80%;  /* 画面の80%を使用 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 各グラフのコンテナ */
+.chart-container {
+    flex: 1;
+    max-width: 600px; /* 各グラフを大きめに設定 */
+    text-align: center;
+    min-width: 350px; /* 最小サイズを確保 */
+}
+
+/* 円グラフ用（アスペクト比を維持して正しい円形に） */
+#pieChart {
+    width: 300px !important;
+    height: 300px !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 棒グラフのサイズ調整 */
+#barChart {
+    width: 100% !important;
+    height: 400px !important;
+}
+
+/* セクション全体（背景を白に設定） */
+#about-intern {
+    background-color: #ffffff;  
+    padding: 80px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* コンテナ（横並びのレイアウト） */
+.about-container {
+    display: flex;  /* 横並び */
+    flex-wrap: nowrap; /* 折り返さない */
+    align-items: center;
+    justify-content: space-between; /* 均等配置 */
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* ロゴ（左側50%） */
+.about-image {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image img {
+    width: 80%;  /* 画像サイズを全体の80%に */
+    max-width: 400px; /* 最大サイズ制限 */
+}
+
+/* テキストエリア（右側50%、位置を中央に） */
+.about-text {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 上下中央揃え */
+    text-align: left;
+    max-width: 600px;
+}
+
+/* タイトル */
+.about-text h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 説明文 */
+.about-text p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* メリットポイント */
+.intern-points {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.intern-points li {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* CTAボタン */
+.cta-button {
+    display: inline-block;
+    background-color: #ff7f50;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background-color: #e67340;
+    transform: scale(1.05);
+}
+
+/* スマホ表示の調整 */
+@media screen and (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image, .about-text {
+        flex: 100%;
+    }
+
+    .about-image img {
+        width: 60%;
+        max-width: 250px;
+    }
+}
+
+.animated-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    display: block; /* 要素を強制的に表示 */
+}
+
+/* スクロール時に表示 */
+.animated-section.visible {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+
+/* セクション全体 */
+#event-schedule {
+    background-color: #ffffff;  /* 白い背景 */
+    padding: 80px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* セクションタイトル */
+#event-schedule h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* タイムラインレイアウト */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* 各イベントボックス */
+.timeline-event {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.timeline-event:hover {
+    transform: scale(1.03);
+}
+
+/* 日付枠 */
+.event-date {
+    background-color: #ff7f50;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    min-width: 100px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+/* イベント詳細 */
+.event-content {
+    flex: 1;
+    text-align: left;
+}
+
+.event-content h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.event-content p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* イベントの詳細ボタン */
+.event-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.event-btn:hover {
+    background-color: #388E3C;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+    .timeline {
+        width: 100%;
+        padding-top: 0;  /* 上余白をリセット */
+    }
+    
+    .timeline-event {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;  /* 余白を適切なサイズに */
+    }
+
+    .event-date {
+        margin-bottom: 10px;
+    }
+}
+
+/* ヘッダーのズレ対策 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 90px;  /* 高さが不足していないか確認 */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* ヘッダーの下に本文が隠れないように調整 */
+body {
+    margin: 0;
+    padding-top: 90px;  /* ヘッダーの高さ分の余白を確保 */
+    overflow-x: hidden; /* 横スクロールを防ぐ */
+}

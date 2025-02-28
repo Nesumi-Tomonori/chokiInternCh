@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>長期インターン支援サイト</title>
+    <link rel="stylesheet" href="styles.css">  <!-- CSS 外部ファイルとして適用 -->
+</head>
+<body>
+<!-- ヘッダー -->
+<header>
+    <div class="header-inner">
+        <!-- 会社ロゴ -->
+        <div class="logo">
+            <a href="#"><img src="img/1.jpeg" alt="会社ロゴ"></a>
+        </div>
+
+        
+        <div class="hamburger-menu">
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        
+            <!-- スマホ用メニュー -->
+            <nav class="mobile-nav" id="mobile-nav">
+                <ul>
+                    <li><a href="#">お役立ち資料</a></li>
+                    <li><a href="#">公開動画</a></li>
+                    <li><a href="#">支援実績</a></li>
+                    <li><a href="#">よくある質問</a></li>
+                    <li><a href="#">採用情報</a></li>
+                </ul>
+            </nav>
+        </div>
+
+
+        
+
+        <!-- 通常メニュー（PC用） -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#">お役立ち資料</a></li>
+                <li><a href="#">公開動画</a></li>
+                <li><a href="#">支援実績</a></li>
+                <li><a href="#">よくある質問</a></li>
+                <li><a href="#">採用情報</a></li>
+            </ul>
+        </nav>
+
+        <!-- お問い合わせボタン（PCのみ表示） -->
+        <a href="https://timerex.net/s/flamers-inc/4d9546c3/" class="contact-button" target="_blank">
+            面談はこちらから
+        </a>
+    </div>
+</header>
+
+    <!-- メインコンテンツ -->
+    <main>
+<!-- 長期インターンとは -->
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let animatedSections = document.querySelectorAll(".animated-section");
+    
+        function handleScroll() {
+            animatedSections.forEach(section => {
+                let rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {  
+                    section.classList.add("visible");
+                }
+            });
+        }
+    
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // 初回実行 - 読み込まれたときに表示
+    });
+    </script>
+<!-- 長期インターンとは -->
+<section id="about-intern">
+    <div class="about-container">
+        <!-- ロゴ（左側50%） -->
+        <div class="about-image">
+            <img src="img/1.jpeg" alt="長期インターン ロゴ">
+        </div>
+
+        <!-- テキストエリア（右側50%） -->
+        <div class="about-text">
+            <h2>長期インターンとは？</h2>
+            <p>
+                長期インターンとは、企業で実際の業務に携わりながらスキルを習得できるプログラムです。  
+                学生時代から社会で活躍できる力を身につけ、成長の機会を得ることができます。
+            </p>
+
+            <!-- メリットポイント -->
+            <ul class="intern-points">
+                <li>✅ 実務経験を通じてスキルアップ</li>
+                <li>✅ 社会人マナーを身につける</li>
+                <li>✅ 人脈を広げることでチャンスが増える</li>
+                <li>✅ 企業から内定直結の可能性も！</li>
+            </ul>
+
+            <!-- CTA（行動喚起ボタン） -->
+            <a href="https://timerex.net/s/flamers-inc/4d9546c3/" class="cta-button" target="_blank">
+                インターンを探す
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+        <section id="intern-merits">
+            <h2>長期インターンのメリット</h2>
+            <div class="merit-container">
+                <div class="merit">
+                    <h3>① 実務経験を積み、即戦力としてのスキルを身につけられる</h3>
+                    <p>長期インターンでは、企業での実際の業務に携わるため、社会で求められるスキルを実践的に学ぶことができます。卒業後すぐに活躍できる人材を目指せます。</p>
+                </div>
+                <div class="merit">
+                    <h3>② 社員と同じ環境で働くことで、社会人基礎力が養える</h3>
+                    <p>企業の一員として働くことで、コミュニケーション力やビジネスマナー、タイムマネジメント能力など、社会人として必要なスキルを磨くことができます。</p>
+                </div>
+                <div class="merit">
+                    <h3>③ 企業とのコネクションができ、就職活動で有利になる</h3>
+                    <p>長期インターンを経験することで、企業の採用担当者や経営陣と直接関わることができ、将来の就職活動において有利な立場を築くことができます。</p>
+                </div>
+            </div>
+        </section>
+
+<!-- 支援実績セクション -->
+<section id="support-results">
+    <h2>支援実績</h2>
+    <div class="charts">
+        <!-- 円グラフ -->
+        <div class="chart-container">
+            <h3>就職先の業界別割合（円グラフ）</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+        
+        <!-- 棒グラフ -->
+        <div class="chart-container">
+            <h3>就職先の業界別割合（棒グラフ）</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Chart.jsのライブラリを読み込む -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // 就職先の業界データ
+    const jobCategories = ["IT・ソフトウェア", "メーカー（製造業）", "コンサル・シンクタンク", "商社・流通", "その他"];
+    const jobPercentages = [30, 25, 20, 15, 10];
+
+    // 円グラフ（オレンジ系）
+    var ctxPie = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: jobCategories,
+            datasets: [{
+                data: jobPercentages,
+                backgroundColor: ["#FF8C00", "#FFA500", "#FFD700", "#FF4500", "#FFA07A"], // オレンジ系
+                borderWidth: 1,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // 棒グラフ（緑系）
+    var ctxBar = document.getElementById('barChart').getContext('2d');
+    new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: jobCategories,
+            datasets: [{
+                label: '就職先の割合 (%)',
+                data: jobPercentages,
+                backgroundColor: ["#006400", "#008000", "#228B22", "#32CD32", "#66CDAA"], // 緑系
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 40
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+
+        <!-- ４つ目の本文「配信動画」 -->
+        <section id="video-library">
+            <h2>配信動画</h2>
+            <div class="video-container">
+
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@long.intern.channel/video/7457711047391055112" data-video-id="7457711047391055112" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@long.intern.channel" href="https://www.tiktok.com/@long.intern.channel?refer=embed">@long.intern.channel</a> 長期インターン始め方ガイド Part1 <a title="長期インターン" target="_blank" href="https://www.tiktok.com/tag/%E9%95%B7%E6%9C%9F%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#長期インターン</a> <a title="インターン" target="_blank" href="https://www.tiktok.com/tag/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#インターン</a> <a title="就活" target="_blank" href="https://www.tiktok.com/tag/%E5%B0%B1%E6%B4%BB?refer=embed">#就活</a> <a target="_blank" title="♬ ニュース的なBGM - Hollywood Labo" href="https://www.tiktok.com/music/ニュース的なBGM-6830446098834786305?refer=embed">♬ ニュース的なBGM - Hollywood Labo</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@long.intern.channel/video/7457711364778364168" data-video-id="7457711364778364168" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@long.intern.channel" href="https://www.tiktok.com/@long.intern.channel?refer=embed">@long.intern.channel</a> 長期インターン始め方ガイドPart2 <a title="就活" target="_blank" href="https://www.tiktok.com/tag/%E5%B0%B1%E6%B4%BB?refer=embed">#就活</a> <a title="インターン" target="_blank" href="https://www.tiktok.com/tag/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#インターン</a> <a title="長期インターン" target="_blank" href="https://www.tiktok.com/tag/%E9%95%B7%E6%9C%9F%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#長期インターン</a> <a target="_blank" title="♬ ニュース・報道・スライドショーのBGM - satoshittt" href="https://www.tiktok.com/music/ニュース-報道-スライドショーのBGM-7065346865094035458?refer=embed">♬ ニュース・報道・スライドショーのBGM - satoshittt</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@long.intern.channel/video/7457711887573142791" data-video-id="7457711887573142791" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@long.intern.channel" href="https://www.tiktok.com/@long.intern.channel?refer=embed">@long.intern.channel</a> 長期インターン始め方ガイド Part2 <a title="長期インターン" target="_blank" href="https://www.tiktok.com/tag/%E9%95%B7%E6%9C%9F%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#長期インターン</a> <a title="インターン" target="_blank" href="https://www.tiktok.com/tag/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3?refer=embed">#インターン</a> <a title="就活" target="_blank" href="https://www.tiktok.com/tag/%E5%B0%B1%E6%B4%BB?refer=embed">#就活</a> <a target="_blank" title="♬ ニュース的なBGM - Hollywood Labo" href="https://www.tiktok.com/music/ニュース的なBGM-6830446098834786305?refer=embed">♬ ニュース的なBGM - Hollywood Labo</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+            </div>
+        </section>
+
+<!-- イベントスケジュール -->
+<section id="event-schedule">
+    <h2>📅 イベントスケジュール</h2>
+    <div class="timeline">
+        <div class="timeline-event">
+            <div class="event-date">6月10日</div>
+            <div class="event-content">
+                <h3>【業界研究セミナー】</h3>
+                <p>IT企業の最新トレンドを学ぶオンラインセミナー</p>
+                <a href="#" class="event-btn">詳細を見る</a>
+            </div>
+        </div>
+
+        <div class="timeline-event">
+            <div class="event-date">6月15日</div>
+            <div class="event-content">
+                <h3>【長期インターン説明会】</h3>
+                <p>大手・ベンチャー多数！インターンの選び方を解説</p>
+                <a href="#" class="event-btn">詳細を見る</a>
+            </div>
+        </div>
+
+        <div class="timeline-event">
+            <div class="event-date">6月25日</div>
+            <div class="event-content">
+                <h3>【キャリア相談会】</h3>
+                <p>就活やインターン経験者との座談会スタイルのイベント</p>
+                <a href="#" class="event-btn">詳細を見る</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <!-- 会社ロゴ -->
+            <div class="footer-logo">
+                <img src="img/1.jpeg" alt="会社ロゴ">
+            </div>
+            
+            <!-- 電話番号（ロゴの下） -->
+            <div class="footer-contact">
+                <p>✆ 電話番号: 〇〇-〇〇〇〇-〇〇〇〇</p>
+            </div>
+    
+            <!-- ナビゲーション -->
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="#about-intern">長期インターンとは</a></li>
+                    <li><a href="#intern-merits">長期インターンのメリット</a></li>
+                    <li><a href="#support-results">支援実績</a></li>
+                    <li><a href="#video-library">配信動画</a></li>
+                    <li><a href="#event-schedule">イベントスケジュール</a></li>
+                </ul>
+            </nav>
+        </div>
+    
+        <!-- コピーライト -->
+        <div class="copyright">
+            <p>© 2024 長期インターンCh. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuIcon = document.getElementById("menu-icon");
+    const mobileNav = document.getElementById("mobile-nav");
+
+    // 確実に最初は非表示にする（余計なクラスを消す）
+    mobileNav.style.display = "none"; 
+
+    menuIcon.addEventListener("click", function () {
+        // メニューが開いているかどうかをチェック
+        if (mobileNav.classList.contains("active")) {
+            mobileNav.classList.remove("active"); // メニューを閉じる
+            mobileNav.style.display = "none"; 
+        } else {
+            mobileNav.classList.add("active"); // メニューを開く
+            mobileNav.style.display = "flex"; 
+        }
+        menuIcon.classList.toggle("active");  // アイコンを "×" に
+    });
+});
+</script>
+
+
+</body>
+</html>
